@@ -1,0 +1,35 @@
+Python 3.8+
+Key Dependencies:
+pythonCopyasyncio>=3.4.3
+numpy>=1.19.0
+nest_asyncio>=1.5.1
+
+
+Performance Metrics
+
+Processing Speed: ~100ms per pattern
+Memory Usage: ~50MB base, ~2MB per active model
+Pattern Recognition Accuracy: 85-95% depending on type
+
+Copy
+# Step 4: Create Core Files
+
+1. `bicameral_ai/core/blank_state.py`:
+```python
+# Create class structure for BlankStateModel
+
+bicameral_ai/chambers/front_chamber.py:
+
+pythonCopy# Implement LiveLearningSystem
+
+bicameral_ai/chambers/back_chamber.py:
+
+pythonCopy# Implement BackChamber system
+
+Create installation files:
+
+bashCopy# requirements.txt
+asyncio>=3.4.3
+numpy>=1.19.0
+nest_asyncio>=1.5.1
+pytest>=6.0.0
