@@ -1,0 +1,145 @@
+# Single-Cell Artificial Life Model
+
+## Overview
+This model implements a computational approximation of a living cell using neural networks to simulate basic biological processes. The system uses a combination of feedforward and recurrent neural architectures to create an autonomous agent that responds to its environment while maintaining internal homeostasis.
+
+## Core Systems
+
+### 1. Metabolism Network
+The metabolism network simulates cellular catabolism and anabolism:
+- **Inputs**: Environmental nutrients, temperature, chemical gradients, current energy level
+- **Outputs**: Energy production rate
+- **Function**: Converts environmental resources into usable energy while considering cellular state
+- **Architecture**: 3-layer neural network (16 → 8 → 1 neurons)
+
+### 2. Homeostasis Network
+Maintains internal cellular balance:
+- **Inputs**: Internal state variables + environmental conditions
+- **Outputs**: Homeostatic response signals
+- **Function**: Regulates internal environment to maintain optimal conditions
+- **Architecture**: 3-layer neural network (32 → 16 → 3 neurons)
+
+### 3. Action Network
+Determines cellular behavior:
+- **Inputs**: Combined internal state, metabolism status, and homeostatic signals
+- **Outputs**: Probability distribution over possible actions
+- **Function**: Decision-making system for cellular behavior
+- **Actions**: Movement, nutrient uptake, waste excretion, division initiation
+- **Architecture**: 3-layer neural network (32 → 16 → 4 neurons)
+
+## Key Variables
+
+### Internal State
+- `energy_level`: Current cellular energy (0.0 to 1.0)
+- `age`: Time since last division
+- `survival_time`: Total existence time
+- `ENERGY_THRESHOLD`: Minimum energy for division (0.7)
+- `METABOLISM_RATE`: Base energy consumption rate (0.1)
+
+### Environmental Inputs
+- Nutrient levels
+- Temperature
+- Chemical gradients
+- Spatial position (implicit in movement actions)
+
+## Cellular Behaviors
+
+### 1. Energy Management
+- Consumes energy at base metabolism rate
+- Generates energy through simulated nutrient processing
+- Maintains energy reserves for division and survival
+
+### 2. Division
+Conditions for reproduction:
+- Energy level > ENERGY_THRESHOLD (0.7)
+- Age > 100 time steps
+- Creates new cell with split energy resources
+- Resets parent cell age
+
+### 3. Environmental Interaction
+- Movement in response to gradients
+- Nutrient uptake based on availability
+- Waste excretion when necessary
+- Temperature response through homeostatic regulation
+
+## Fitness Evaluation
+Cellular fitness is calculated as:
+```python
+fitness = (survival_time * energy_level) / 100.0
+```
+This rewards both longevity and energy efficiency.
+
+## Biological Analogues
+
+| Model Component | Biological Equivalent |
+|----------------|----------------------|
+| Metabolism Network | Enzymatic Pathways |
+| Homeostasis Network | Cellular Signaling |
+| Action Network | Protein Expression |
+| Energy Level | ATP Concentration |
+| Division Threshold | Cell Cycle Checkpoints |
+
+## Limitations and Future Improvements
+
+1. **Current Limitations**
+- Simplified chemical interactions
+- No protein synthesis simulation
+- Basic genetic information storage
+- Limited membrane dynamics
+
+2. **Potential Enhancements**
+- Gene regulatory networks
+- Protein folding simulation
+- Complex membrane interactions
+- Multi-cellular organization
+- Evolutionary adaptation
+- Immune system responses
+- Epigenetic modifications
+
+## Implementation Notes
+
+The model is implemented using TensorFlow/Keras and follows object-oriented principles:
+- Modular architecture for easy extension
+- State management through TensorFlow Variables
+- Configurable parameters for experimentation
+- Clear separation of concerns between networks
+
+## Usage Example
+
+```python
+# Create environment
+environment = {
+    'nutrients': [0.5, 0.3, 0.4],
+    'temperature': 0.5,
+    'chemicals': [0.2, 0.3, 0.4]
+}
+
+# Initialize cell
+cell = ArtificialCell()
+
+# Simulation loop
+for step in range(1000):
+    state = cell.simulate_step(environment)
+    
+    if cell.should_divide():
+        new_cell = cell.divide()
+        
+    fitness = calculate_fitness(state)
+```
+
+## Research Applications
+
+This model can be used to study:
+1. Cellular decision-making
+2. Energy optimization strategies
+3. Homeostatic mechanisms
+4. Environmental adaptation
+5. Reproductive strategies
+6. Basic principles of life
+
+## Technical Requirements
+
+- TensorFlow 2.x
+- Python 3.7+
+- NumPy
+- Basic understanding of neural networks and cellular biology
