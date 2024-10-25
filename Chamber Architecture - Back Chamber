@@ -1,0 +1,4 @@
+class BackChamber:
+    model_storage: Dict[str, Model]
+    pattern_network: Dict[str, Pattern]
+    knowledge_base: Dict[str, Any]
