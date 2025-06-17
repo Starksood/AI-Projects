@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FastAPI Fetch Example</title>
+</head>
+<body>
+    <h1>Message from Backend:</h1>
+    <pre id="response"></pre>
+    <script>
+        async function loadMessage() {
+            const res = await fetch('http://localhost:8000/api/message');
+            const data = await res.json();
+            document.getElementById('response').textContent = data.message;
+        }
+        loadMessage();
+    </script>
+</body>
+</html>
